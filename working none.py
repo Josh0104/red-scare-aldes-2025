@@ -160,6 +160,10 @@ def process_directory(input_dir, output_dir):
     for file_name in sorted(files):
         file_path = os.path.join(input_dir, file_name)
 
+        # Ignore README or non-txt files
+        if not file_name.lower().endswith('.txt'):
+            continue
+
         if os.path.isfile(file_path):
             print(f"--- Processing {file_name} ---", file=sys.stderr)
 
@@ -172,19 +176,16 @@ def process_directory(input_dir, output_dir):
 
 
 def main():
+    # Relative paths
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    input_dir = os.path.join(script_dir, 'data')
+    output_dir = os.path.join(script_dir, 'output')
 
-    # Set your input directory (where the test case files are)
-    input_dir = r'E:\Study ITU\Seminars in Data Science\algorithm design\data'
-
-    # Set your output directory (where results will be written)
-    output_dir = r'E:\Study ITU\Seminars in Data Science\algorithm design\output'
-
-    # Process the directory and handle all test cases
+    # process_directory expects string paths
     process_directory(input_dir, output_dir)
 
     print("\nProcessing complete.", file=sys.stderr)
-    print(
-        f"Results for 'none' are in: {os.path.join(output_dir, 'none')}", file=sys.stderr)
+    print(f"Results for 'none' are in: {os.path.join(output_dir, 'none')}", file=sys.stderr)
 
 
 if __name__ == "__main__":
