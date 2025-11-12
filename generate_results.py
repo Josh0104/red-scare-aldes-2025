@@ -5,7 +5,7 @@ import sys
 import alternate
 import working_none
 import few
-import some
+import working_some
 
 
 def read_instance(path):
@@ -104,7 +104,7 @@ def solve_few(instance):
 
 def solve_some(instance):
     try:
-        result = some.solve_some(
+        result = working_some.solve_some(
             instance["n"],
             instance["edges"],
             instance["s"],
