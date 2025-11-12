@@ -11,7 +11,8 @@ def output_to_console(result):
 def write_to_output_file(result, output_file):
     """Write result to a specific output file."""
     try:
-        with open(output_file, 'a') as file:
+        # Use write mode so each run overwrites previous results for the file
+        with open(output_file, 'w') as file:
             file.write(str(result) + '\n')
     except Exception as e:
         print(
