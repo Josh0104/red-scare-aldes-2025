@@ -17,7 +17,8 @@ This repository contains our solutions and tooling for the Red Scare project in 
 	```powershell
 	py generate_results.py
 	```
-	This runs the algorithms and places all results into `results.txt`.
+	This command runs all algorithms and saves the results into `results.txt`.
+
 
 ## Results
 

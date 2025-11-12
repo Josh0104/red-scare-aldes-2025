@@ -179,11 +179,9 @@ def process_directory(input_dir, output_dir):
 
 def main():
 
-    # Set your input directory (where the test case files are)
-    input_dir = r'E:\Study ITU\Seminars in Data Science\algorithm design\data'
-
-    # Set your output directory (where results will be written)
-    output_dir = r'E:\Study ITU\Seminars in Data Science\algorithm design\output'
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    input_dir = os.path.join(script_dir, 'data')
+    output_dir = os.path.join(script_dir, 'output')
 
     # Process the directory and handle all test cases
     process_directory(input_dir, output_dir)

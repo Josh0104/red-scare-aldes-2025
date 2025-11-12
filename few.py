@@ -110,9 +110,9 @@ def main():
     """
     Main function to run the "Few" problem solver.
     """
-
-    input_dir = r'E:\Study ITU\Seminars in Data Science\algorithm design\data'
-    output_dir = r'E:\Study ITU\Seminars in Data Science\algorithm design\output'
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    input_dir = os.path.join(script_dir, 'data')
+    output_dir = os.path.join(script_dir, 'output')
 
     # --- Process the directory ---
     output_subdir = os.path.join(output_dir, 'few')

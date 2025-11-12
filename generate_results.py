@@ -4,6 +4,8 @@ import sys
 
 import alternate
 import working_none
+import few
+import some
 
 
 def read_instance(path):
@@ -86,6 +88,33 @@ def solve_none(instance):
         return "?"
     return str(result)
 
+def solve_few(instance):
+    try:
+        result = few.solve_few(
+            instance["n"],
+            instance["edges"],
+            instance["s"],
+            instance["t"],
+            instance["red"],
+        )
+    except Exception as error:
+        print(f"Few solver failed on {instance['name']}: {error}", file=sys.stderr)
+        return "?"
+    return str(result)
+
+def solve_some(instance):
+    try:
+        result = some.solve_some(
+            instance["n"],
+            instance["edges"],
+            instance["s"],
+            instance["t"],
+            instance["red"],
+        )
+    except Exception as error:
+        print(f"Some solver failed on {instance['name']}: {error}", file=sys.stderr)
+        return "?"
+    return str(result)
 
 def gather_rows(data_dir):
     rows = []
@@ -103,16 +132,18 @@ def gather_rows(data_dir):
 
         alt_answer = solve_alternate(instance)
         none_answer = solve_none(instance)
+        few_answer = solve_few(instance)
+        some_answer = solve_some(instance)
 
         row = "\t".join(
             [
                 instance["name"],
                 str(instance["n"]),
                 alt_answer,
-                "?",
-                "?",
+                few_answer,
+                "?", #many_answer placeholder
                 none_answer,
-                "?",
+                some_answer,
             ]
         )
         rows.append(row)
@@ -133,21 +164,16 @@ def write_results(rows, output_path):
 
 def main():
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    default_dir = os.path.join(script_dir, "data")
-    default_output = os.path.join(script_dir, "results.txt")
+    data_dir = os.path.join(script_dir, "data")
+    output_file = os.path.join(script_dir, "results.txt")
 
-    parser = argparse.ArgumentParser(description="Generate results.txt for the Red Scare assignment.")
-    parser.add_argument("--data-dir", default=default_dir, help="Folder with instance files (default: %(default)s)")
-    parser.add_argument("--output", default=default_output, help="Where to write the table (default: %(default)s)")
-    args = parser.parse_args()
-
-    if not os.path.isdir(args.data_dir):
-        print(f"Data directory not found: {args.data_dir}", file=sys.stderr)
+    if not os.path.isdir(data_dir):
+        print(f"Data directory not found: {data_dir}", file=sys.stderr)
         sys.exit(1)
 
-    rows = gather_rows(args.data_dir)
-    write_results(rows, args.output)
-    print(f"Wrote results to {args.output}")
+    rows = gather_rows(data_dir)
+    write_results(rows, output_file)
+    print(f"Wrote results to {output_file}")
 
 
 if __name__ == "__main__":
