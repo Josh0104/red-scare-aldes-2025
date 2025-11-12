@@ -24,7 +24,7 @@ This repository contains our solutions and tooling for the Red Scare project in 
 
 The results.txt contains tab-separated results for all algorithms on all graphs in the data folder.
 
-Marking:
+Notation:
 - `n`: number of vertices in the data file
 - `A`: Alternate algorithm results
 - `F`: Few algorithm results
