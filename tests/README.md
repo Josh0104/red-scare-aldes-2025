@@ -5,4 +5,4 @@ The test cases are for the following algorithms:
 - Few
 - Alternate
 
-The test cases does not take account for all instance, only for some since all the test cases are written manually.
+The test cases does not take account for all instance, only for some, since all the test cases are checked manually.
