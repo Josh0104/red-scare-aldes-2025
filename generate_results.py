@@ -6,6 +6,7 @@ import alternate
 import working_none
 import few
 import working_some
+import solved_many
 
 
 def read_instance(path):
@@ -88,6 +89,7 @@ def solve_none(instance):
         return "?"
     return str(result)
 
+
 def solve_few(instance):
     try:
         result = few.solve_few(
@@ -102,6 +104,7 @@ def solve_few(instance):
         return "?"
     return str(result)
 
+
 def solve_some(instance):
     try:
         result = working_some.solve_some(
@@ -115,6 +118,30 @@ def solve_some(instance):
         print(f"Some solver failed on {instance['name']}: {error}", file=sys.stderr)
         return "?"
     return str(result)
+
+
+def solve_many(instance):
+    try:
+        n = instance["n"]
+        edges = instance["edges"]
+        E_count = len(edges)
+        s = instance["s"]
+        t = instance["t"]
+        red = instance["red"]
+
+        result = solved_many.solve_many_entry(
+            n,
+            E_count,
+            s,
+            t,
+            red,
+            edges
+        )
+    except Exception as error:
+        print(f"Many solver failed on {instance['name']}: {error}", file=sys.stderr)
+        return "?"
+    return str(result)
+
 
 def gather_rows(data_dir):
     rows = []
@@ -134,6 +161,7 @@ def gather_rows(data_dir):
         none_answer = solve_none(instance)
         few_answer = solve_few(instance)
         some_answer = solve_some(instance)
+        many_answer = solve_many(instance)
 
         row = "\t".join(
             [
@@ -141,7 +169,7 @@ def gather_rows(data_dir):
                 str(instance["n"]),
                 alt_answer,
                 few_answer,
-                "?", #many_answer placeholder
+                many_answer,
                 none_answer,
                 some_answer,
             ]
